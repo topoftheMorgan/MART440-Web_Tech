@@ -1,27 +1,47 @@
+var images = ["mainImage","mainImage2", "mainImage3","mainImage4","mainImage5","mainImage6","mainImage7","mainImage8", "mainImage9","mainImage10"]
+
+
+function getImages(i){
+    //document.getElementById(images[i]).style.display="none";
+    for (var x = 0; x < images.length; x++){
+    
+        if(x !== i ){
+            document.getElementById(images[x]).style.display="none";
+        }
+        else{
+            document.getElementById(images[x]).style.display="block";
+        }
+    }
+   // document.getElementById(images[i]).style.display="block";
+    console.log(images[i]);
+}
+
 function getChoice1(){
     {
         var myChoice = document.getElementById("choice").value;
         var myQuestion = document.getElementById("question");
         if(myChoice === "village")
         {
+            getImages(9);
             document.getElementById("choice").style.display="none";
             document.getElementById("btnSubmit").style.display="none";
             
             document.getElementById("choice2").style.display="block";
             document.getElementById("btnSubmit2").style.display="block";
             
-            document.getElementById("mainImage").src = "wizard.jpeg"
+            //document.getElementById("mainImage").src = "wizard.jpeg"
             myQuestion.innerHTML = "You go out into the village and see a knight and the village bum. Who do you ask?";
         }
         else if(myChoice === "party")
         {
+            getImages(1);
             document.getElementById("choice").style.display="none";
             document.getElementById("btnSubmit").style.display="none";
             
             document.getElementById("choice3").style.display="block";
             document.getElementById("btnSubmit3").style.display="block";
 
-            document.getElementById("mainImage").src = "toad.png"
+            //document.getElementById("mainImage").src = "toad.png"
             myQuestion.innerHTML = "You invite all of the other apprentices in the village to your party but, only five minutes passed when the security system went off and turned everyone into toads." + "<br>Do you want to try again?";
 
         }
@@ -50,6 +70,7 @@ function getChoice2()
     var myQuestion = document.getElementById("question");
     if(myChoice === "bum")
     {
+        getImages(2);
         document.getElementById("choice2").style.display="none";
         document.getElementById("btnSubmit2").style.display="none";
         
@@ -61,6 +82,7 @@ function getChoice2()
     }
     else if(myChoice === "knight")
     {
+        getImages(3);
         document.getElementById("choice2").style.display="none";
         document.getElementById("btnSubmit2").style.display="none";
         
@@ -111,6 +133,7 @@ function getChoice4()
     var myQuestion = document.getElementById("question");
     if(myChoice === "meal")
     {
+        getImages(4);
         document.getElementById("choice4").style.display="none";
         document.getElementById("btnSubmit4").style.display="none";
         
@@ -122,6 +145,7 @@ function getChoice4()
     }
     else if(myChoice === "force")
     {
+        getImages(5);
         document.getElementById("choice2").style.display="none";
         document.getElementById("btnSubmit2").style.display="none";
         
@@ -145,6 +169,7 @@ function getChoice5()
     var myQuestion = document.getElementById("question");
     if(myChoice === "food and drink")
     {
+        getImages(6);
         document.getElementById("choice5").style.display="none";
         document.getElementById("btnSubmit5").style.display="none";
         
@@ -156,6 +181,7 @@ function getChoice5()
     }
     else if(myChoice === "just food")
     {
+        getImages(7);
         document.getElementById("choice5").style.display="none";
         document.getElementById("btnSubmit5").style.display="none";
         
@@ -179,6 +205,7 @@ function getChoice6()
     var myQuestion = document.getElementById("question");
     if(myChoice === "forest")
     {
+        getImages(8);
         document.getElementById("choice6").style.display="none";
         document.getElementById("btnSubmit6").style.display="none";
         
@@ -190,6 +217,7 @@ function getChoice6()
     }
     else if(myChoice === "home")
     {
+        getImages(5);
         document.getElementById("choice6").style.display="none";
         document.getElementById("btnSubmit6").style.display="none";
         
