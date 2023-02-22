@@ -2,7 +2,7 @@ var imageTags = ["image1", "image2", "image3", "image4", "image5", "image6", "im
 
 var blankImagePath = "./images/card.png";
 
-var actualImages = new Array("image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10");
+var actualImages = new Array("images/bird.webp", "images/bunny.jpg", "images/cat.jpeg", "images/cheeta.webp", "images/duck.jpeg", "images/cat.jpeg", "images/bird.webp", "images/cheeta.webp", "images/bunny.jpg", "images/duck.jpeg");
     
 function printBlanks()
 {
