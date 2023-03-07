@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <title>
+        Matching
+    </title>
+    <script src="./main.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    </link>
+</head>
+
+<body onload="printBlanks();">
+    <h1>Memory Game</h1>
+
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell"><img src="./images/bird.webp" id="image1" width="250" height="200" onclick="flipImage(0);"></div>
+                <div class="divTableCell"><img src="./images/bunny.jpg" id="image2" width="250" height="200" onclick="flipImage(1);"></div>
+                <div class="divTableCell"><img src="./images/cat.jpeg" id="image3" width="250" height="200" onclick="flipImage(2);"></div>
+                <div class="divTableCell"><img src="./images/cheeta.webp" id="image4" width="250" height="200" onclick="flipImage(3);"></div>
+                <div class="divTableCell"><img src="./images/duck.jpeg" id="image5" width="250" height="200" onclick="flipImage(4);"></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell"><img src="./images/cheeta.webp" id="image6" width="250" height="200" onclick="flipImage(5);"></div>
+                <div class="divTableCell"><img src="./images/duck.jpeg" id="image7" width="250" height="200" onclick="flipImage(6);"></div>
+                <div class="divTableCell"><img src="./images/bunny.jpg" id="image8" width="250" height="200" onclick="flipImage(7);"></div>
+                <div class="divTableCell"><img src="./images/bird.webp" id="image9" width="250" height="200" onclick="flipImage(8);"></div>
+                <div class="divTableCell"><img src="./images/cat.jpeg" id="image10" width="250" height="200" onclick="flipImage(9);"></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">First Name</div>
+                <div class="divTableCell"><input type="text" id="txtFirstName"></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Last Name</div>
+                <div class="divTableCell"><input type="text" id="txtLastName"></div>
+            </div>
+
+            <div class="divTableRow">
+                <div class="divTableCell">Age</div>
+                <div class="divTableCell"><input type="text" id="txtAge"></div>
+            </div>
+            
+            <div class="divTableRow">
+                <div class="divTableCell"><button id="btnSubmit" onclick="addToPlayer();">Submit</button></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
