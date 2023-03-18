@@ -73,7 +73,7 @@ function flipImage(number)
         {  
             player.score = score;
             localStorage.setItem("playerInfo", JSON.stringify(player));
-            window.location = "index.html";
+            window.location = "end.html"
         }
     }
         
@@ -81,7 +81,6 @@ function flipImage(number)
 
 function imagesDisappear()
 {
-
     console.log(firstNumber);
     document.getElementById(imageTags[firstNumber]).src = blankImagePath;
     document.getElementById(imageTags[secondNumber]).src = blankImagePath;
@@ -89,7 +88,7 @@ function imagesDisappear()
     secondNumber = -1;
 }
 
-// add to the JSON from the textboxes
+// add to JSON from the textboxes
 function addToPlayer()
 {
     var firstName = document.getElementById("txtFirstName").value;
@@ -103,18 +102,14 @@ function addToPlayer()
     window.location = "index.html";
 }
 
-// get the information out of JSON
+// get info out of JSON
 function playerInfo()
 {
     var playerInformation = localStorage.getItem("playerInfo");
     player = JSON.parse(playerInformation);
-    var str = "Name: " + player.firstname + " " + player.lastname + "<br>" +
-    "Age: " + player.age + "<br>" +
-    "Score: " + player.score;
+    var str = "Name: " + player.firstname + " " + player.lastname + "<br>" + "Age: " + player.age + "<br>" + "Score: " + player.score;
     if(document.getElementById("endInformation") != null)
     {
         document.getElementById("endInformation").innerHTML = str;
     }
-    
-   
 }
