@@ -1,0 +1,31 @@
+#square {
+width: 100px;
+height: 100px;
+background: rgb(212, 133, 243);
+position: absolute;
+left: 0;
+top: 400;
+}
+
+#circle {
+    width: 100px;
+    height: 100px;
+    background: rgb(214, 243, 133);
+    position: absolute;
+    left: 0;
+    top: 400;
+    }
+
+.stuff{
+background: rgb(0, 247, 255);
+color:white;
+}
+
+#third{
+background: rgb(180, 149, 213);
+color:white;
+}
+
+body{
+    background-color: rgb(135, 222, 177);
+}
