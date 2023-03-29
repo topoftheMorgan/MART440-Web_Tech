@@ -1,5 +1,5 @@
 var animalSelector = "#animal";
-var allAnimals = new Array("./images/frog.jpeg","./images/hippo.jpeg","./images/owl.jpeg");
+var allAnimals = new Array();
 class AnimalInfo{
     constructor(selector, imagePath)
     {
@@ -21,15 +21,24 @@ class AnimalInfo{
     }
 }
 
-function allAnimals()
+function changeAnimals()
 {
-    document.getElementById("allAnimal").src = images[2];
+    var randomNumber = Math.floor(Math.random() * allAnimals.length);
+
+    $(allAnimals[randomNumber].theSelector).fadeOut(500).fadeIn(500);
+
+    document.getElementById("animal").src = allAnimals[randomNumber].imagePath;
+
 }
 
 function initializeArray()
 {
-    var animal = new AnimalInfo("#animal", "./images/frog.jpg","./images/hippo.jpeg","./images/owl.jpeg");
-    allAnimals.push(animal);
+    allAnimals.push(new AnimalInfo("#animal", "./images/frog.jpeg"));
+    allAnimals.push(new AnimalInfo("#animal", "./images/hippo.jpeg"));
+    allAnimals.push(new AnimalInfo("#animal", "./images/owl.jpeg"));
+    allAnimals.push(new AnimalInfo("#animal", "./images/panda.jpeg"));
+    allAnimals.push(new AnimalInfo("#animal", "./images/fox.jpeg"));
+  
 }
     $(document).ready(function(){
         initializeArray();
@@ -40,15 +49,20 @@ function initializeArray()
         
     $(allAnimals[2].theSelector).attr("src", allAnimals[2].theImagePath);
 
-    $("button").click(function(){
-       
+    $("button").click(function()
+    {
+       // changeAnimals()
+        
         $(".stuff").fadeOut();
 
         $("#third").toggle();
            setInterval(moveSquare, 1000);
            setInterval(moveCircle, 1500);
+           setInterval(changeAnimals, 1000);
+
+           $("#third").text("Cycle of random animals! :)");
+           console.log()
         
-        $(allAnimals[0].theSelector).fadeOut().fadeIn();
         
     });
     
