@@ -1,0 +1,16 @@
+ {
+    "Creator" : "Morgan Bowman",
+    "Product" : "Animal Pillows",
+
+    "Size" : {
+        "width" : "15in", 
+        "height" : "10in",
+        },
+    
+    "Types" : [
+        "Fox",
+        "Panda",
+        "Dog",
+        "Husky"
+    ]
+}
