@@ -19,7 +19,7 @@ createSquares();
 drawSquare();
 
 // Timer
-setInterval(moveGreenSquare, 5000);
+setInterval(moveColorSquare, 5000);
 
 function createSquares() {
     square1 = new Square(x, y, 20, 20, "blue");
@@ -29,7 +29,7 @@ function createSquares() {
 }
 
 // Random
-function moveGreenSquare() {
+function moveColorSquare() {
 
     square2.setX(Math.floor(Math.random() * canvas.width));
     square2.setY(Math.floor(Math.random() * canvas.height));
