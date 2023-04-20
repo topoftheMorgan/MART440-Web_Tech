@@ -2,10 +2,11 @@ var canvas;
 var ctx;
 var x = 50;
 var y = 50;
-var square1, square2, square3, square4, square5;
+var square1;
 var direction;
 var questions;
-var squareArray = [];
+var squareArray =[];
+var fruitArray = [];
 var lives = 3;
 let score = 0;
 $(document).ready(function(){
@@ -25,17 +26,19 @@ function setup()
     canvas = document.getElementById("myCanvas");
     ctx = canvas.getContext("2d");
 
-    square1 = new Square(100,100,50,50,"blue");
-    square2 = new Square(200,200,100,100,"#70002e");
-    square3 = new Square(300,300,150,150,"#green");
-    square4 = new Square(500,500,250,250,"purple");
-    square5 = new Square(400,400,100,100,"pink");
-    $.getJSON("data/information.json", function(data) {
+    square1 = new Square(50, 50, 50, 50, "red");
+    fruitArray.push(new Fruit(100, 100, "green"));
+    fruitArray.push(new Fruit(200, 200, "yellow"));
+
+
+    
+    $.getJSON("information.json", function(data) {
         for(var i = 0; i < data.squares.length; i++)
         {
             squareArray.push(new Square(data.squares[i].x,data.squares[i].y, data.squares[i].h, data.squares[i].w, data.squares[i].color));
         }
         drawSquare();
+        drawScore();
     });
     
 
@@ -55,131 +58,137 @@ function getKey(event)
     if(actualLetter == "w")
     {
         moveUp();
-        direction = "up";
     }
     if(actualLetter == "s")
     {
         moveDown();
-        direction = "down";
+        console.log("hi");
     }
     if(actualLetter == "a")
     {
         moveLeft();
-        direction = "left";
     }
     if(actualLetter == "d")
     {
         moveRight();
-        direction = "right";
     }
-    var test = hasCollided(square1,square2, square3, square4, square5);
-    var test2 = false;
-    for(var i = 0; i < squareArray.length; i++)
-    {
 
-        test2 = hasCollided(square1,squareArray[i]);
-        if(test2 == true)
-        {
-            break;
-        }
-        
-        //console.log(test2);
-    }
-    if(test || test2)
-    {
-        lives--;
-        score--;
-        if(direction == "left")
-        {
-            moveRight();
-        }
-        else if(direction == "right")
-        {
-            moveLeft();
-        }
-        else if(direction == "up")
-        {
-            moveDown();
-        }
-        else if(direction == "down")
-        {
-            moveUp();
-        }
-    
-    }
     drawSquare(); 
     
 }
 
+function decrementLives(){
+    lives--;
+    score--;
+}
+function checkAllCollisions(){
+    let collision = false;
+    for(var i = 0; i < squareArray.length; i++)
+    {
+
+        collision = hasCollided(square1,squareArray[i]);
+
+        if(collision)
+        {
+            break;
+        }
+    }
+
+    console.log("Has Collided?", collision);
+    return collision;
+}
+
 function moveUp()
 {
-    square1.y-=10;
+    let collision = checkAllCollisions();
+    if (!collision){
+        square1.y-=10;
+    }
+    else{
+        decrementLives();
+        square1.y+=5;
+    }
+    
 }
 function moveDown()
 {
-    square1.y+=10;
+    let collision = checkAllCollisions();
+    if (!collision){
+        square1.y+=10;
+    }
+    else{
+        decrementLives();
+        square1.y-=5;
+    }
 }
+
 function moveRight()
 {
-    square1.x+=10;
+    let collision = checkAllCollisions();
+    if (!collision){
+        square1.x+=10;
+    }
+    else{
+        decrementLives();
+        square1.x-=5;
+    }
 }
 function moveLeft()
 {
-    square1.x-=10;
+    let collision = checkAllCollisions();
+    if (!collision){
+        square1.x-=10;
+    }
+    else{
+        decrementLives();
+        square1.x+=5;
+    }
 }
 
 function drawSquare()
 {
     ctx.clearRect(0,0,800,600);
+
+    
+
     ctx.fillStyle = square1.mainColor;
     ctx.fillRect(square1.x, square1.y, square1.width, square1.height);
-    ctx.fillStyle = square2.mainColor;
-    ctx.fillRect(square2.x, square2.y, square2.width, square2.height);
-    ctx.fillStyle = square3.mainColor;
-    ctx.fillRect(square3.x, square3.y, square3.width, square3.height);
-    ctx.fillStyle = square4.mainColor;
-    ctx.fillRect(square4.x, square4.y, square4.width, square4.height);
-    ctx.fillStyle = square5.mainColor;
-    ctx.fillRect(square5.x, square5.y, square5.width, square5.height);
 
-    for(var i = 0; i < squareArray.length; i++)
-    {
-        ctx.fillStyle = squareArray[i].mainColor;
-        ctx.fillRect(squareArray[i].x, squareArray[i].y, squareArray[i].width, squareArray[i].height);
+    for (let i = 0; i < squareArray.length; i++){
+        let square = squareArray[i];
+        ctx.fillStyle = square.mainColor;
+        ctx.fillRect(square.x, square.y, square.width, square.height);
+    }
+
+    for (let i = 0; i < fruitArray.length; i++){
+        let fruit = fruitArray[i];
+        ctx.fillStyle = fruit.color;
+        ctx.fillRect(fruit.x, fruit.y, 50, 50);
+        
     }
 
     ctx.font = "30px Arial";
     ctx.fillText("Lives: " + lives, 10, 50);
-    ctx.fillText("Score: " + score, 10, 70);    
+    ctx.fillText("Score: " + score, 10, 80);    
 
 }
 
-drawScore();
+class Fruit 
+{
+  constructor(x, y, color) 
+  {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+  }
+  
+}
 
-function hasCollided(object1, object2, object3, object4, object5) {
+function hasCollided(object1, object2) {
     return !(
         ((object1.y + object1.height) < (object2.y)) ||
         (object1.y > (object2.y + object2.height)) ||
-
         ((object1.x + object1.width) < object2.x) ||
-        (object1.x > (object2.x + object2.width)) ||
-
-        ((object1.y + object1.height) < (object3.y)) ||
-        (object1.y > (object3.y + object3.height)) ||
-
-        ((object1.x + object1.width) < object3.x) ||
-        (object1.x > (object3.x + object3.width)) ||
-
-        ((object1.y + object1.height) < (object4.y)) ||
-        (object1.y > (object4.y + object4.height)) ||
-
-        ((object1.x + object1.width) < object4.x) ||
-        (object1.x > (object4.x + object4.width))
-
-        ((object1.y + object1.height) < (object5.y)) ||
-        (object1.y > (object5.y + object5.height)) ||
-
-        ((object1.x + object1.width) < object5.x) ||
-        (object1.x > (object5.x + object5.width))
+        (object1.x > (object2.x + object2.width))
     );
 }
