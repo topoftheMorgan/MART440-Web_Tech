@@ -20,8 +20,8 @@ var config = {
 
 var player;
 var stars;
-var coin;
-var apple;
+var coins;
+var apples;
 var bombs;
 var platforms;
 var cursors;
@@ -56,6 +56,8 @@ function create() {
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
+    platforms.create(70, 120, 'ground');
+    platforms.create(50, 800, 'ground');
 
     // The player and its settings
     player = this.physics.add.sprite(100, 450, 'dude');
@@ -109,7 +111,7 @@ function create() {
         }
     });
 
-    coin = this.physics.add.group({
+    coins = this.physics.add.group({
         key: 'coin',
         repeat: 11,
         setXY: {
@@ -119,7 +121,7 @@ function create() {
         }
     });
 
-    apple = this.physics.add.group({
+    apples = this.physics.add.group({
         key: 'apple',
         repeat: 11,
         setXY: {
@@ -129,20 +131,20 @@ function create() {
         }
     });
 
-    stars.children.iterate(function (child) {
+   stars.children.iterate(function (child) {
 
         //  Give each star a slightly different bounce
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
     });
 
-    coin.children.iterate(function (child) {
+    coins.children.iterate(function (child) {
 
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
     });
 
-    apple.children.iterate(function (child) {
+    apples.children.iterate(function (child) {
 
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
@@ -159,16 +161,16 @@ function create() {
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(coin, platforms);
-    this.physics.add.collider(apple, platforms);
+    this.physics.add.collider(coins, platforms);
+    this.physics.add.collider(apples, platforms);
     this.physics.add.collider(bombs, platforms);
 
     //  Checks to see if the player overlaps with any of the stars if he does call the collectStar function
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
-    this.physics.add.overlap(player, coin, collectCoin, null, this);
+    this.physics.add.overlap(player, coins, collectCoin, null, this);
 
-    this.physics.add.overlap(player, apple, collectApple, null, this);
+    this.physics.add.overlap(player, apples, collectApple, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
@@ -231,9 +233,9 @@ function collectCoin (player, coin)
     score += 10;
     scoreText.setText('Score: ' + score);
 
-    if (coin.countActive(true) === 0)
+    if (coins.countActive(true) === 0)
     {
-        coin.children.iterate(function (child) {
+        coins.children.iterate(function (child) {
 
             child.enableBody(true, child.x, 0, true, true);
 
@@ -258,9 +260,9 @@ function collectApple(player, apple)
     score += 5;
     scoreText.setText('Score: ' + score);
 
-    if (apple.countActive(true) === 0) {
+    if (apples.countActive(true) === 0) {
 
-        apple.children.iterate(function (child) {
+        apples.children.iterate(function (child) {
 
             child.enableBody(true, child.x, 0, true, true);
 
